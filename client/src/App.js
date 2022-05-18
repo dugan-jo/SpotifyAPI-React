@@ -2,9 +2,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect } from "react";
 import Login from "./components/Login.jsx";
 
-import reducerCases from "./utils/Constants";
-import { useStateProvider } from "./utils/StateProvider";
-import Spotify from "./components/Spotify.jsx";
+import { reducerCases } from "./utils/Constants";
+import { useStateProvider } from "./utils/StateProvider.jsx";
+import Spotify from "./components/Spotify";
 
 export default function App() {
   const [{ token }, dispatch] = useStateProvider();
@@ -16,6 +16,7 @@ export default function App() {
         .substring(1)
         .split("&")[0]
         .split("=")[1];
+      console.log("token_ID: " + token);
       dispatch({ type: reducerCases.SET_TOKEN, token });
     }
   }, [token, dispatch]);
