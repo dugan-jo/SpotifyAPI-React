@@ -3,6 +3,7 @@ import { useStateProvider } from '../utils/StateProvider'
 import axios from 'axios'
 import { reducerCases } from '../utils/Constants';
 
+import styled from "styled-components";
 
 export default function Playlists() {
     const [{ token, playlists }, dispatch] = useStateProvider();
@@ -25,12 +26,44 @@ export default function Playlists() {
         getPlaylistData()
     }, [token, dispatch])
     return (
-        <div>
+        <Container>
             <ul>
                 {
                     playlists.map(playlist => <li key={playlist.id}>{playlist.name}</li>)
                 }
             </ul>
-        </div>
+        </Container>
     )
 }
+
+const Container = styled.div`
+height: 100%;
+overflow: hidden;
+
+ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    height: 52vh;
+    max-height: 100%;
+    overflow: auto;
+    $::-webkit-scrollbar {
+        width: 0.7rem;
+        &-thumb {
+            background-color: rgba( 255, 255, 255, 0.6);
+        }
+    }
+    li {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        cursor: pointer;
+        transition: 0.3s ease-in-out;
+        &:hover {
+            color: white;
+        }
+
+    }
+`;
