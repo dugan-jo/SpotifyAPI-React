@@ -19,20 +19,18 @@ export default function Playlists() {
             const playlists = items.map(({name, id}) => {
                 return { name, id };
             });
-            console.log(playlists);
-            dispatch({ type: reducerCases.SET_PLAYLIST, playlists })
+            console.log(items[4].name)
+            dispatch({ type: reducerCases.SET_PLAYLISTS, playlists })
         };
         getPlaylistData()
     }, [token, dispatch])
     return (
         <div>
-            {
-                playlists.map((name, id ) => {
-                    return (
-                        <li key={id}></li>
-                    )
-                })
-            }
+            <ul>
+                {
+                    playlists.map(playlist => <li key={playlist.id}>{playlist.name}</li>)
+                }
+            </ul>
         </div>
     )
 }
