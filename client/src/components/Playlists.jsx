@@ -11,15 +11,14 @@ export default function Playlists() {
             const response = await axios.get('https://api.spotify.com/v1/me/playlists', {
                 headers: {
                     Authorization: "Bearer " + token,
-                    "content-type": "application/json"
-
+                    'Content-Type': 'application/json',
                 }
             })
             const {items} = response.data
             console.log(items)
             const playlists = items.map(({name, id}) => {
                 return { name, id };
-            })
+            });
             console.log(playlists);
             dispatch({ type: reducerCases.SET_PLAYLIST, playlists })
         };
@@ -27,15 +26,13 @@ export default function Playlists() {
     }, [token, dispatch])
     return (
         <div>
-            <ul>
-                {
-                    playlists.map(({name, id}) => {
-                        return (
-                            <li key={id}></li>
-                        )
-                    })
-                }
-            </ul>
+            {
+                playlists.map((name, id ) => {
+                    return (
+                        <li key={id}></li>
+                    )
+                })
+            }
         </div>
     )
 }
