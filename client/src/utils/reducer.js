@@ -5,7 +5,7 @@ export const initialState = {
   playlists: [],
   userInfo: "",
 };
-
+const go 
 const reducer = (state, action) => {
   switch (action.type) {
     case reducerCases.SET_TOKEN: {
@@ -20,6 +20,7 @@ const reducer = (state, action) => {
         playlists: action.playlists,
       };
     }
+
     case reducerCases.SET_USER: {
       return {
         ...state,
