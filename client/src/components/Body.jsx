@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { AiFillClockCircle } from "react-icons/ai";
+import { RiBubbleChartFill } from "react-icons/ri";
 import { useStateProvider } from "../utils/StateProvider";
 import axios from "axios";
 import { reducerCases } from "../utils/Constants";
 
-export default function Body() {
+export default function Body({ headerBackground }) {
   const [
     { token, selectedPlaylistID, selectedPlaylist },
     dispatch,
@@ -23,6 +23,7 @@ export default function Body() {
           },
         }
       );
+      console.log(response);
       const selectedPlaylist = {
         id: response.data.id,
         name: response.data.name,
@@ -35,7 +36,7 @@ export default function Body() {
           name: track.name,
           artist: track.artists.map(artist => artist.name),
           image: track.album.images[2].url,
-          duration: track.duration_ms,
+          popularity: track.popularity,
           album: track.album.name,
           context_uri: track.album.uri,
           track_number: track.track_number,
@@ -47,7 +48,7 @@ export default function Body() {
   }, [token, dispatch, selectedPlaylistID]);
 
   return (
-    <Container>
+    <Container headerBackground={headerBackground}>
       {selectedPlaylist && (
         <>
           <div className="playlist">
@@ -73,7 +74,7 @@ export default function Body() {
               </div>
               <div className="col">
                 <span>
-                  <AiFillClockCircle />
+                  <RiBubbleChartFill />
                 </span>
               </div>
             </div>
@@ -85,7 +86,7 @@ export default function Body() {
                     name,
                     artist,
                     image,
-                    duration,
+                    popularity,
                     album,
                     context_uri,
                     track_number,
@@ -110,7 +111,7 @@ export default function Body() {
                         <span>{album}</span>
                       </div>
                       <div className="col">
-                        <span>{duration}</span>
+                        <span>{popularity}</span>
                       </div>
                     </div>
                   );
@@ -150,13 +151,15 @@ const Container = styled.div`
   .list {
     .header_row {
       display: grid;
-      grid-template-columns: 0.3fr 3fr 2fr 0.1fr;
+      grid-template-columns: 0.3fr 3fr 1.87fr 0fr;
       color: #dddcdc;
       margin: 1rem 0 0 0;
       position: sticky;
       top: 15vh;
       padding: 1rem 3rem;
       transition: 0.3s ease-in-out;
+      background-color: ${({ headerBackground }) =>
+        headerBackground ? "rgba(0,0,0,0.7)" : "none"};
     }
     .tracks {
       margin: 0 2rem;
