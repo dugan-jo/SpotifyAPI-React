@@ -11,7 +11,7 @@ export default function Body() {
     const getInitialPlaylist = async () => {
       console.log(selectedPlaylistID);
       const response = await axios.get(
-        `https://api.spotify.com/v1/playlist/${selectedPlaylistID}`,
+        `https://api.spotify.com/v1/playlists/${selectedPlaylistID}`,
         {
           headers: {
             Authorization: "Bearer " + token,
@@ -19,6 +19,25 @@ export default function Body() {
           },
         }
       );
+      const selectedPlaylist = {
+        id: response.data.id,
+        name: response.data.name,
+        description: response.data.description.startsWith("<a")
+          ? ""
+          : response.data.description,
+        image: response.data.images[0].url,
+        tracks: response.data.tracks.items.map(({ track }) => ({
+          id: track.id,
+          name: track.name,
+          artist: track.artists.map(artist => artist.name),
+          image: track.album.images[2].url,
+          duration: track.duration_ms,
+          album: track.album.name,
+          context_uri: track.album.uri,
+          track_number: track.track_number,
+        })),
+      };
+      console.log(selectedPlaylist);
       console.log(response);
     };
     getInitialPlaylist();
