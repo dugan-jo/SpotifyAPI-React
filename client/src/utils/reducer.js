@@ -44,10 +44,10 @@ const reducer = (state, action) => {
       };
     }
 
-    case reducerCases.SET_PLAYLIST: {
+    case reducerCases.SET_PLAYER_STATE: {
       return {
         ...state,
-        selectedPlaylist: action.selectedPlaylist,
+        playerState: action.playerState,
       };
     }
 
