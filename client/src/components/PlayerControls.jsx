@@ -54,6 +54,5 @@ const Container = styled.div`
   .next,
   .state {
     font-size: 1.8rem;
-    color: black;
   }
 `;
