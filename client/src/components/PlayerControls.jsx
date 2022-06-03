@@ -101,6 +101,7 @@ const Container = styled.div`
     transition: 0.3s ease-in-out;
     &:hover {
       color: white;
+      background-color: white;
     }
   }
   .state {
