@@ -145,6 +145,7 @@ const Container = styled.div`
       .title {
         color: white;
         font-size: 4rem;
+        background-color: #de3e3e;
       }
     }
   }
