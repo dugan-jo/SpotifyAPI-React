@@ -35,7 +35,7 @@ const Container = styled.div`
     navBackground ? "rgba(0,0,0,0.5)" : "none"};
   .search__bar {
     background-color: white;
-    width: 30%;
+    width: 45%;
     padding: 0.4rem 1rem;
     border-radius: 2rem;
     display: flex;
